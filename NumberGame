@@ -1,0 +1,54 @@
+import java.util.Scanner;
+import java.util.Random;
+
+public class NumberGame {
+    
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        Random random = new Random();
+        
+        System.out.println("Welcome to the Number Guessing Game!");
+             int score = 0;
+               System.out.print("Enter the number of rounds you want to play: ");
+        int rounds = scanner.nextInt();
+        
+        for (int roundNumber = 1; roundNumber <= rounds; roundNumber++) {
+            System.out.println("\nRound " + roundNumber);
+            
+            int numberToGuess = random.nextInt(100) + 1;
+            int maxAttempts = 10;
+            
+            for (int attempt = 1; attempt <= maxAttempts; attempt++) {
+                System.out.print("Attempt " + attempt + "/" + maxAttempts + ": Enter your guess (1-100): ");
+                int guess = scanner.nextInt();
+                
+                if (guess < numberToGuess) {
+                    System.out.println("Too low!");
+                } else if (guess > numberToGuess) {
+                    System.out.println("Too high!");
+                } else {
+                    System.out.println("Congratulations! You guessed the correct number!");
+                    score++;
+                    break;
+                }
+                
+                if (attempt == maxAttempts) {
+                    System.out.println("Sorry, you've used all your attempts. The correct number was " + numberToGuess + ".");
+                }
+            }
+        }
+                System.out.println("\nGame over! Your final score is " + score + " out of " + rounds + " rounds.");
+        
+        System.out.print("Do you want to play again? (yes/no): ");
+        scanner.nextLine(); 
+        String playAgain = scanner.nextLine().trim().toLowerCase();
+        
+        if (playAgain.equals("yes")) {
+            main(null); 
+        } else {
+            System.out.println("Thank you for playing! Goodbye!");
+        }
+        
+        scanner.close();
+    }
+}
